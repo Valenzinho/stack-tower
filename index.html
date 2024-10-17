@@ -60,6 +60,27 @@
             draw()
         }
 
+        function draw() {
+            if (mode == MODES.GAMEOVER) return
+
+            drawBackground()
+            drawBoxes()
+
+            window.requestAnimationFrame(draw)
+        }
+
+        function drawBackground() {
+            context.fillStyle = 'black'
+            context.fillRect(0, 0, canvas.width, canvas.height)
+        }
+
+        function drawBoxes() {
+            boxes.forEach((box) => {
+                const { x, y, width, color } = box
+                const newY = INITIAL_BOX_Y
+            })
+        }
+
         restart()
     </script>
 </head>
