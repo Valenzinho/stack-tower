@@ -68,6 +68,10 @@
             drawBackground()
             drawBoxes()
 
+            if (mode === MODES.BOUNCE) {
+                moveAndDetectCollision()
+            }
+
             window.requestAnimationFrame(draw)
         }
 
@@ -89,9 +93,29 @@
         function createNewBox() {
             boxes[current] = {
                 x: 0,
-                y: 50,
+                y: (current + 10) * BOX_HEIGHT,
                 width: boxes[current - 1].width,
                 color: 'white'
+            }
+        }
+
+        function moveAndDetectCollision() {
+            const currentBox = boxes[current]
+            currentBox.x += xSpeed 
+
+            const isMovingRight = xSpeed > 0
+            const isMovingLeft = xSpeed < 0
+
+            const hasHitRightSide =
+                currentBox.x + currentBox.width > canvas.width
+
+            const hasHitLeftSide = currentBox.x < 0
+
+            if (
+                (isMovingRight && hasHitRightSide) || 
+                (isMovingLeft && hasHitLeftSide)
+            ) {
+                xSpeed = -xSpeed
             }
         }
 
